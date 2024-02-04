@@ -17,6 +17,7 @@ type CurrentWeatherData struct {
 	APIkey string
 }
 
+// Weather represents the weather data retrieved from an API.
 type Weather struct {
 	Coord struct {
 		Lon float32 `json:"lon"`

@@ -22,12 +22,17 @@ In this way, the `CurrentWeatherData` struct acts as a facade, providing a simpl
 
 ## Running the Tests
 
-To run the tests, you will need to pass in your OpenWeatherMap API key and a flag to indicate whether to run integration tests. You can do this using the `-args` flag with the `go test` command.
+To run the tests, you will need to set your OpenWeatherMap API key and a flag to indicate whether to run integration tests as environment variables. You can do this by creating a `.env` file in your project root and adding your variables there. See the `.env.example` file for an example of how to set up your `.env` file.
 
-Here is an example:
+Once you've set up your `.env` file, you can run your tests with the `go test` command. The tests will automatically use the variables from your `.env` file.
+
+Here is an example of how to set up your `.env` file:
 
 ```bash
-go test -args -apikey=your_api_key -integration=true
+APIKEY=your_api_key
+INTEGRATION=true
+
+go test
 ```
 
 ## Documentation
