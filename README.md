@@ -19,3 +19,17 @@ The `responseParser` method is used to parse the HTTP response body into a `Weat
 The `GetByGeoCoordinates` and `GetByCityAndCountryCode` methods use the `doRequest` method to retrieve weather data from the OpenWeatherMap API. They format the API URL with the appropriate parameters and pass it to the `doRequest` method.
 
 In this way, the `CurrentWeatherData` struct acts as a facade, providing a simple interface for retrieving weather data and hiding the complexities of making HTTP requests and parsing JSON responses.
+
+## Running the Tests
+
+To run the tests, you will need to pass in your OpenWeatherMap API key and a flag to indicate whether to run integration tests. You can do this using the `-args` flag with the `go test` command.
+
+Here is an example:
+
+```bash
+go test -args -apikey=your_api_key -integration=true
+```
+
+## Documentation
+
+You can find the official documentation for the OpenWeatherMap API [here](https://openweathermap.org/api).
