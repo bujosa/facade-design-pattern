@@ -2,29 +2,36 @@ package openWeatherMap
 
 import (
 	"bytes"
-	"flag"
 	"fmt"
 	"io"
+	"os"
 	"testing"
 )
 
-var integration = flag.Bool("integration", false, "Use to run integration tests or not")
-var apiKey = flag.String("apikey", "", "Pass your open weather map api key")
+var integration bool
+var apiKey string
 
 func init() {
-	flag.Parse()
+    integrationStr := os.Getenv("INTEGRATION")
+    if integrationStr == "true" {
+        integration = true
+    } else {
+        integration = false
+    }
+
+    apiKey = os.Getenv("APIKEY")
 }
 
 func Test_Integration_OpenWeatherMap_GetWeatherByCityName(t *testing.T) {
-	if !*integration {
+	if !integration {
 		t.SkipNow()
 	}
 
-	if *apiKey == "" {
+	if apiKey == "" {
 		t.Error("Not api key passed")
 	}
 
-	weatherMap := CurrentWeatherData{*apiKey}
+	weatherMap := CurrentWeatherData{apiKey}
 
 	weather, err := weatherMap.GetByCityAndCountryCode("Madrid", "ES")
 	if err != nil {
@@ -39,15 +46,15 @@ func Test_Integration_OpenWeatherMap_GetWeatherByCityName(t *testing.T) {
 }
 
 func Test_Integration_OpenWeatherMap_GetWeatherByGeographicalCoordinates(t *testing.T) {
-	if !*integration {
+	if !integration {
 		t.SkipNow()
 	}
 
-	if *apiKey == "" {
+	if apiKey == "" {
 		t.Error("Not api key passed")
 	}
 
-	weatherMap := CurrentWeatherData{*apiKey}
+	weatherMap := CurrentWeatherData{apiKey}
 
 	weather, err := weatherMap.GetByGeoCoordinates(-3.7, 40.42)
 	if err != nil {
